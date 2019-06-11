@@ -21,6 +21,11 @@ button {
     padding: 0;
   }
 
+  #qty1 {
+    width: 30px;
+  }
+
+
   main {
     display: grid;
     grid-template-columns: 1fr;
@@ -41,7 +46,6 @@ button {
   .polaroid {
     border-radius: 8px;
     padding: 20px;
-
     width: 80%;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -49,7 +53,8 @@ button {
   }
 
   #top-header {
-    text-align: center
+    text-align: center;
+    padding: 5px;
   }
 
 
