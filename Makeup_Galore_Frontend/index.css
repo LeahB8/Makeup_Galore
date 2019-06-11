@@ -1,0 +1,72 @@
+div.makeup-card {
+    background-color: plum;
+    height: 600px;
+    width: 500px;
+    box-shadow: 10px 10px pink;
+    padding: 50px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+button {
+    font-size: 15px;
+    color: #fff;
+    background-color: rgb(150, 17, 94);
+    border-radius: 10px;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+
+  img {
+    border-radius: 8px;
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    padding: 5px;
+  }
+
+  .polaroid {
+    border-radius: 8px;
+    padding: 20px;
+
+    width: 80%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  }
+
+  #top-header {
+    text-align: center
+  }
+
+
+  .logo {float:left;}
+.logo a {
+	text-transform:uppercase;
+	line-height:80px;
+	font-size:26px;
+	color:#333;
+}
+.logo a span {
+	display:inline-block;
+	padding-right:18px;
+}
+  .logo a span.b1 {font-weight:900;}
+  .logo a span.b2 {font-weight:700;}
+  .logo a span.b3 {font-weight:400;}
+  .logo a span.b4 {font-weight:300;}
+  .logo a span.b5 {font-weight:100;}
+  .logo a span.b6 {font-weight:50;}
