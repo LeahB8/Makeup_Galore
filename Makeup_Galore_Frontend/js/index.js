@@ -22,14 +22,15 @@ const mascaraDiv = document.querySelector('#mascara-div')
 
 const cartDiv = document.querySelector('#cart-item-div')
 
-
-
 const sidebar = document.querySelector('#mySidebar')
+
+const refreshBtn = document.querySelector('#refresh-btn')
+
 
 //------------------ global variables -----------------//
 
 let pageNumber = 0
-let currentUserId = 3 
+let currentUserId = 4
 let currentUser = {}
 
 //------------------ initialise function -----------------//
@@ -39,7 +40,7 @@ const init = () => {
     fetchUser(currentUserId).then(user => {
         currentUser = user
         updateCartWithItems()
-    }).then(fetchCalls())
+    }).then(fetchCalls)
 }
 
 const fetchCalls = () => {
@@ -66,11 +67,10 @@ const renderItem = (item, div) => {
         //     item.brand = item.name
         // }
 
-         if (item.price === "0.0" || null ) return item.price = 10.0
-         if (item.description == null) return  item.description = 'Click on the image to find out more.'
+         if (item.price === "0.0" || item.price === null ) return item.price = 10.0
+         if (item.description === 'null') item.description = 'Click on the image to find out more.'
          if (item.brand === null ) return item.brand = item.name
-            
-        
+         if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
 
         const capitalize = (s) => {
             return s && s[0].toUpperCase() + s.slice(1);
@@ -83,9 +83,9 @@ const renderItem = (item, div) => {
             <img src="${item.image_link}">
             </a>
             <p>${capitalize(item.brand)}</p>
-            <p> $ ${item.price}</p>
+            <p> $ ${item.price} CAD </p>
             <p>${item.description}</p>
-            <button id='add-button${item.id}' class='w3-button w3-pink w3-round-large buy-button'>Add to cart</button>
+            <button id='add-button${item.id}'>Add to cart</button>
         `
         div.append(makeupCard)
 
@@ -130,7 +130,7 @@ const deleteItemFromDOM = (item) => {
 }
 
 const addItemToDOM = (item, currentUserId) => {
-    addItemToServer(item)
+    return addItemToServer(item, currentUserId)
         .then(() => {
             currentUser.items.push(item)
             updateCartWithItems()
@@ -166,22 +166,27 @@ const updateCartWithItems = () => {
 
 const renderCartWithEachItem = item => {
     const itemInCart = document.createElement('div')
+    itemInCart.className = 'cart-item'
 
-    if (item.price == 0.0 || null) {
-        item.price = 10.0
-    }
+    if (item.price == 0.0 || null) return item.price = 10.0
+    // if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
 
     itemInCart.innerHTML = `
         <h4>${item.name}</h4>
-        <img class='w3-display-container' src="${item.image_link}" style="height: 50px; width: 50px;">
+        <img class='w3-display-container' src="${item.image_link}" style="height: 70px; width: 70px;">
         <p> $ ${item.price}</p>
         <div class='w3-display-container'>
             Qty: <input id="qty${item.id}" type="number" min='1' value="1" name="qty" onKeyPress='isInputNumber(event)' />
-            <button id='increase-button${item.id}' class='w3-button w3-pink w3-round-large delete-button' onclick="increase_by_one('qty${item.id}')">+</button>
-            <button id='decrease-button${item.id}' class='w3-button w3-pink w3-round-large delete-button' onclick="decrease_by_one('qty${item.id}')">-</button><br>
-            <button id='delete-button${item.id}' onclick='deleteItemFromDOM(${item})' class='w3-button w3-pink w3-round-large delete-button'>X</button>
+            <button id='increase-button${item.id}'>+</button>
+            <button id='decrease-button${item.id}'>-</button><br>
+            <button id='delete-button${item.id}'>X</button>
         </div>
     `
+
+    itemInCart.querySelector(`#delete-button${item.id}`).addEventListener('click', () => deleteItemFromDOM(item))
+    itemInCart.querySelector(`#increase-button${item.id}`).addEventListener('click', () => increase_by_one(`qty${item.id}`))
+    itemInCart.querySelector(`#decrease-button${item.id}`).addEventListener('click', () => decrease_by_one(`qty${item.id}`))
+
     cartDiv.append(itemInCart)
   
 }
@@ -190,11 +195,13 @@ const isInputNumber = (event) => {
    let x = String.fromCharCode(event.which)
 
    if(!(/[0-9]/.test(x))){
-       alert("Please input a whole number.")
+       alert("Please input a number.")
        event.preventDefault()
    }
 
 }
+
+refreshBtn.addEventListener('click', () => updateCartWithItems)
 
 //------------------ forward/back button event listeners ----------------//
 

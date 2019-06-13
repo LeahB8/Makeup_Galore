@@ -76,7 +76,7 @@ const addItemToServer = (item, currentUserId) => {
 }
 
 const deleteItemFromServer = item => {
-    return fetch(ITEM_URL + `${item.id}`, {
+    return fetch(ITEM_URL + `/${item.id}`, {
         method: 'DELETE'
     }).then(resp => resp.json())
 }

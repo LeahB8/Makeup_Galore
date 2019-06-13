@@ -1,19 +1,16 @@
-div.makeup-card {
-    background-color: plum;
-    height: 600px;
-    width: 500px;
-    box-shadow: 10px 10px pink;
-    padding: 50px;
-    border-radius: 10px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
 button {
     font-size: 15px;
     color: #fff;
-    background-color: rgb(150, 17, 94);
-    border-radius: 10px;
+    background-color: rgb(199, 53, 138);
+    border-radius: 20px;
+  }
+
+  .makeup-galore-sidebar {
+    color: grey
+  }
+
+  .cart-item {
+    padding: 30px
   }
 
   body {
@@ -25,6 +22,43 @@ button {
     width: 30px;
   }
 
+  #cartItemsModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+
+  .dropdown-menu {
+    padding: 10px;
+
+  }
+
+  #navbarNavDropdown a {
+    text-align: left;
+    }
+
+  .dropdown-item {
+    font-size: 20px;
+
+  }
+
+  #about-us-section {
+      background-image: url("../images/makeup_background.jpg");
+      background-color: #cccccc;
+      height: 900px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+  }
+
+  #about-us-text {
+    position: center;
+    padding: 400px;
+  }
 
   main {
     display: grid;
@@ -46,7 +80,7 @@ button {
   .polaroid {
     border-radius: 8px;
     padding: 20px;
-    width: 80%;
+    width: 60%;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 25px;
@@ -57,21 +91,37 @@ button {
     padding: 5px;
   }
 
+  .menu_block {
+    position:fixed;
+    z-index:9999;
+    height:80px;
+    width:100%;
+    /* background-color: palevioletred; */
+    box-shadow:0 2px 3px rgba(0,0,0,0.1);
+    font-size: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-  .logo {float:left;}
-.logo a {
-	text-transform:uppercase;
-	line-height:80px;
-	font-size:26px;
-	color:#333;
-}
-.logo a span {
-	display:inline-block;
-	padding-right:18px;
-}
-  .logo a span.b1 {font-weight:900;}
-  .logo a span.b2 {font-weight:700;}
-  .logo a span.b3 {font-weight:400;}
-  .logo a span.b4 {font-weight:300;}
-  .logo a span.b5 {font-weight:100;}
-  .logo a span.b6 {font-weight:50;}
+  #page-content-all {
+    padding: 25px 50px 75px;
+  }
+
+
+  #header-makeup-galore {
+    text-transform:uppercase;
+    line-height:80px;
+    font-size:35px;
+    color:#333;
+    display:inline-block;
+    padding-right:18px;
+  }
+
+  #header-makeup-galore span.b1 {font-weight:800;}
+  #header-makeup-galore span.b2 {font-weight:700;}
+  #header-makeup-galore span.b3 {font-weight:500;}
+  #header-makeup-galore span.b4 {font-weight:350;}
+  #header-makeup-galore span.b5 {font-weight:200;}
+  #header-makeup-galore span.b6 {font-weight:100;}
+
+  
