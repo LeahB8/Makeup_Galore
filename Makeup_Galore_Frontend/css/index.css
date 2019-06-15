@@ -29,8 +29,6 @@ button {
     transform: translate(-50%, -50%);
   }
 
-
-
   .dropdown-menu {
     padding: 10px;
 
@@ -45,19 +43,29 @@ button {
 
   }
 
-  #about-us-section {
-      background-image: url("../images/makeup_background.jpg");
-      background-color: #cccccc;
-      height: 900px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
+  /* #about-us-section {
+    
+  } */
+
+  .about-us-p {
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    top: 50%;
+    width: 50%;
+    margin-left: -20%;
+    margin-top: -5%;
   }
 
-  #about-us-text {
-    position: center;
+  #about-us-div {
+    position: relative;
     padding: 400px;
+    background-image: url("../images/makeup_background.jpg");
+    background-color: #cccccc;
+    height: 900px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   main {
