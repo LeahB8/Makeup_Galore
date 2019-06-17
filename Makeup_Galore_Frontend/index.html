@@ -16,15 +16,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <style>
-      /* .w3-sidebar a {font-family: "Roboto", sans-serif}
+    <!-- <style> -->
+      <!-- /* .w3-sidebar a {font-family: "Roboto", sans-serif}
       /* body,h1,h2,h3,h4,h5,h6, {font-family: "Montserrat", sans-serif;} */
-    </style>
+    /* </style> */ -->
 
     <title>Makeup Galore</title>
     
 
-<!-- Top menu on small screens -->
+<!-- Top menu -->
 
 <div class='menu_block' >
   <nav id="top-header" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,7 +62,7 @@
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <!-- <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
-
+<body>
 <!-- !PAGE CONTENT! -->
 <div id='page-content-all' class="w3-main">
 
@@ -130,40 +130,68 @@
         </div>
         <div class="modal-footer">
           <p id="total-price"></p>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="refresh-btn" type="button" class="btn btn-primary">Update</button>
+          <button id="pay-btn" type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentModal">Pay</button>
+          <!-- <button id="refresh-btn" type="button" class="btn btn-primary">Update</button> -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Footer -->
-  <!-- <footer style="width:100%" id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h4>Contact</h4>
-          <p><i class="fa fa-fw fa-map-marker"></i> Makeup Galore</p>
-          <p><i class="fa fa-fw fa-phone"></i> 020766175780</p>
-          <p><i class="fa fa-fw fa-envelope"></i> info@makeupgalore.com</p>
-        </div>
-        <div class="col">
-          <h4>We accept</h4>
-          <p><i class="fa fa-fw fa-cc-visa"></i> Visa</p>
-          <p><i class="fa fa-fw fa-cc-mastercard"></i> Mastercard</p>
-          <p><i class="fa fa-fw fa-paypal"></i> Paypal</p>
-        </div>
-        <div class="col">
-          <i class="fa fa-facebook-official"></i>
-          <i class="fa fa-instagram"></i>
-          <i class="fa fa-twitter"></i>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">Payment</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="payment-icons">
+                <img class="card-icon" src="images/visa.png" alt="visa icon"> <img class="card-icon" src="images/mastercard.png" alt="mastercard icon">
+            </div>
+            <div id='payment-div' class="modal-body">
+                <p id="total-price"></p>    
+
+              <form id='payment-form' action="">
+                <input id="card-number-input" placeholder="Card Number" type="number" min="16" max="16">
+                <input id="cvc-number-input" placeholder="CVC" type="number" min="3" max="3">
+                <br><br>
+                <p>Expiry: 
+                  <select id="expiry-month-input">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                  <select id="expiry-year-input">
+                      <option>2027</option>
+                      <option>2026</option>
+                      <option>2025</option>
+                      <option>2024</option>
+                      <option>2023</option>
+                      <option>2022</option>
+                      <option>2021</option>
+                      <option>2020</option>
+                      <option>2019</option>
+                  </select>
+                </p>
+                <input id="pay-btn" class="btn btn-primary" type='submit' value='Pay'> 
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-
-    <div style="width:100%">Created by <a href="https://www.linkedin.com/in/leah-r-boyd/"target="_blank">Leah Boyd</a></div> -->
-  <!-- </footer> -->
 
 
 <!-- Footer -->
@@ -201,7 +229,7 @@
                 <p><i class="fa fa-fw fa-phone"></i> 020766175780</p>
             </li>
             <li>
-                <p><i class="fa fa-fw fa-envelope"></i> info@makeupgalore.com</p>            </li>
+                <p><i class="fa fa-fw fa-envelope"></i> info@makeupgalore.com</p>
             </li>
           </ul>
   

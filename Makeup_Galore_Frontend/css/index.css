@@ -5,12 +5,49 @@ button {
     border-radius: 20px;
   }
 
+  .quantity-input {
+    width: 30%;
+    max-width: 30px;
+  }
+
+  .delete-button {
+    /* float: right; */
+  }
+
+  .item-name-price {
+    /* display: inline-block;
+    white-space: nowrap;
+    padding-bottom: 50px; */
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .quantity-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-item-image {
+    /* float: left;
+    padding: 10px; */
+  }
+
+  .item-price {
+    /* float: right; */
+  }
+
+  .item-name {
+    /* float: left; */
+  }
+
   .makeup-galore-sidebar {
     color: grey
   }
 
   .cart-item {
-    padding: 30px
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
   }
 
   body {
@@ -23,10 +60,8 @@ button {
   }
 
   #cartItemsModal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .dropdown-menu {
@@ -42,6 +77,10 @@ button {
     font-size: 20px;
 
   }
+/* 
+.modal-header {
+  position: fixed;
+} */
 
   /* #about-us-section {
     
@@ -98,23 +137,34 @@ button {
     text-align: center;
     padding: 5px;
   }
-
+/* 
   .menu_block {
     position:fixed;
     z-index:9999;
     height:80px;
     width:100%;
-    /* background-color: palevioletred; */
-    box-shadow:0 2px 3px rgba(0,0,0,0.1);
+    background-color: palevioletred;
+    box-shadow:0 2px 3px rgba(141, 112, 112, 0.1);
     font-size: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
+  
+  } */
+
+  footer {
+    z-index:9999;
+    height:80px;
+    width:100%;
+    /* background-color: palevioletred; */
+    box-shadow:0 2px 3px rgba(141, 112, 112, 0.1);
+
   }
 
   #page-content-all {
     padding: 25px 50px 75px;
   }
 
+  #pay-btn {
+    float: right;
+  }
 
   #header-makeup-galore {
     text-transform:uppercase;
@@ -132,4 +182,105 @@ button {
   #header-makeup-galore span.b5 {font-weight:200;}
   #header-makeup-galore span.b6 {font-weight:100;}
 
+  .payment-icons {
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .card-icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    height:50px;
+    width:50px;
+  }
+
+  #card-number-input {
+    width: 180px;
+  }
+
+  #cvc-number-input {
+    width: 60px;
+  }
+
   
+/* __________ Menu __________ */
+.menu_block {
+	position:fixed;
+	z-index:9999;
+	left:0;
+	top:0;
+	right:0;
+	height:80px;
+	width:100%;
+	background-color:#fff;
+	box-shadow:0 2px 3px rgba(0,0,0,0.1);
+}
+/* 
+.navmenu ul li {
+	position:relative;
+	display:inline-block;
+}
+.navmenu ul li a {
+	display:block;
+	margin:0 0 0 -3px;
+	padding:30px 20px;
+	text-transform:uppercase;
+	font-weight:900;
+	line-height:20px;
+	font-size:13px;
+	color:#666;
+	transition: all 0.3s ease-in-out; 
+	-webkit-transition: all 0.3s ease-in-out;
+}
+.navmenu li:hover a,
+.navmenu li.active a {
+	color:#333;
+} */
+
+/* Sub menu */
+/* .sub-menu ul {
+	display: none;
+	position: absolute;
+	z-index: 9990;
+	width: 180px;
+	left: 50%;
+	top: 100%;
+	padding: 0;
+	margin: 0 0 0 -90px;
+}
+.sub-menu.last ul {right:0; left:auto;}
+.sub-menu ul:before {
+	content:'';
+	position:absolute;
+	left:50%;
+	top:-6px;
+	margin-left:-5px;
+	width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 6px solid #1c1c1c;
+}
+
+.sub-menu ul li  {
+	margin:0;
+	padding:0;
+	width:100%;
+	border-top: 0;
+}
+.sub-menu ul li a {
+	position:relative;
+	margin:0;
+	padding: 15px 5px 14px 21px;
+	font-weight:400;
+	text-align:left;
+	font-size:12px;
+	color:#999 !important;
+	background:#1c1c1c;
+	border-bottom:1px solid #282828;
+}
+.sub-menu ul li:last-child a {border-bottom:0;}
+
+.sub-menu ul li.active a, .sub-menu ul li a:hover {color:#fff !important; background:#161616;} */

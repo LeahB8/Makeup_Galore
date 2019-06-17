@@ -11,7 +11,6 @@ const eyesBtn = document.querySelector('#eyes-button')
 const foundationBtn = document.querySelector('#foundation-button')
 const lipsBtn = document.querySelector('#lips-button')
 const mascaraBtn = document.querySelector('#mascara-button')
-const nailPolishBtn = document.querySelector('#nail-polish-button')
 
 const blushDiv = document.querySelector('#blush-div')
 const bronzerDiv = document.querySelector('#bronzer-div')
@@ -21,12 +20,11 @@ const lipsDiv = document.querySelector('#lips-div')
 const mascaraDiv = document.querySelector('#mascara-div')
 
 const cartDiv = document.querySelector('#cart-item-div')
+const refreshBtn = document.querySelector('#refresh-btn')
+const totalPriceEl = document.querySelector('#total-price')
 
 const sidebar = document.querySelector('#mySidebar')
 
-const refreshBtn = document.querySelector('#refresh-btn')
-
-const totalPriceEl = document.querySelector('#total-price')
 
 //------------------ global variables -----------------//
 
@@ -37,7 +35,6 @@ let currentUser = {}
 //------------------ initialise function -----------------//
 
 const init = () => {
-    
     fetchUser(currentUserId).then(user => {
         currentUser = user
         updateCartWithItems()
@@ -60,17 +57,9 @@ const renderItem = (item, div) => {
         const makeupCard = document.createElement('div')
         makeupCard.className = 'polaroid'
 
-        // if (item.price === "0.0" || null ) {
-        //     item.price = 10.0
-        // } else if (item.description == null) {
-        //     item.description = 'Click on the image to find out more.'
-        // } else if (item.brand === null ) {
-        //     item.brand = item.name
-        // }
-
-         if (item.price === "0.0" || item.price === null ) return item.price = 10.0
-         if (item.description == null) item.description = 'Click on the image to find out more.'
-         if (item.brand === null ) return item.brand = item.name
+         if (item.price === "0.0" || item.price == null ) return item.price = 10.0
+         if (item.description == null) return item.description = 'Click on the image to find out more.'
+         if (item.brand == null ) return item.brand = item.name
          if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
 
         const capitalize = (s) => {
@@ -140,18 +129,19 @@ const addItemToDOM = (item, currentUserId) => {
 //------------------------- User's cart -----------------------------//
 
 const increase_by_one = (field) => {
+    // debugger
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
-    quantityEl.value = itemQuantity++
+    quantityEl.value = itemQuantity + 1
 }
     
 const decrease_by_one = (field) => {
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
     if (itemQuantity > 0) {
-    if( (itemQuantity - 1) > 0) {
-        quantityEl.value = itemQuantity--
-    }
+        if( (itemQuantity - 1) > 0) {
+            quantityEl.value = itemQuantity - 1
+        }
     }
 } 
 
@@ -169,17 +159,20 @@ const renderCartWithEachItem = cartItem => {
 
     if (cartItem.price === "0.0" || cartItem.price === null) return cartItem.price = 10.0
 
-    // if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
 
     itemInCart.innerHTML = `
-        <h4>${cartItem.name}</h4>
-        <img class='w3-display-container' src="${cartItem.image_link}" style="height: 70px; width: 70px;">
-        <p> $ ${cartItem.price}</p>
-        <div class='w3-display-container'>
-            Qty: <input id="qty${cartItem.id}" type="number" min='1' value="1" name="qty" onKeyPress='isInputNumber(event)' />
-            <button id='increase-button${cartItem.id}'>+</button>
-            <button id='decrease-button${cartItem.id}'>-</button><br>
-            <button id='delete-button${cartItem.id}'>X</button>
+        <div class="item-name-price">
+            <h4 class="item-name">${cartItem.name}</h4>
+            <p class="item-price">$ ${cartItem.price}</p>
+        </div>
+        <img class="cart-item-image" src="${cartItem.image_link}" style="height: 70px; width: 70px;">
+        <div class="quantity-container">
+            <div>
+                Qty: <input class='quantity-input' id="qty${cartItem.id}" type="number" min='1' value="1" name="qty" onKeyPress='isInputNumber(event)' />
+                <button id='increase-button${cartItem.id}'>+</button>
+                <button id='decrease-button${cartItem.id}'>-</button>
+            </div>
+            <button class='delete-button' id='delete-button${cartItem.id}'>X</button>
         </div>
     `
 
@@ -210,7 +203,12 @@ const isInputNumber = (event) => {
    }
 }
 
-refreshBtn.addEventListener('click', () => updateCartWithItems)
+// refreshBtn.addEventListener('click', () => {
+    
+//     updateCartWithItems()
+// })
+
+
 
 //------------------ forward/back button event listeners ----------------//
 
