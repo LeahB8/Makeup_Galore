@@ -1,8 +1,8 @@
-button {
-    font-size: 15px;
+button, .button {
+    font-size: 20px;
     color: #fff;
     background-color: rgb(199, 53, 138);
-    border-radius: 20px;
+    border-radius: 6px !important;
   }
 
   .quantity-input {
@@ -13,6 +13,11 @@ button {
   .delete-button {
     /* float: right; */
   }
+
+  /* #payment-div {
+    display: flex;
+    justify-content: space-between;
+  } */
 
   .item-name-price {
     /* display: inline-block;
@@ -27,18 +32,6 @@ button {
     justify-content: space-between;
   }
 
-  .cart-item-image {
-    /* float: left;
-    padding: 10px; */
-  }
-
-  .item-price {
-    /* float: right; */
-  }
-
-  .item-name {
-    /* float: left; */
-  }
 
   .makeup-galore-sidebar {
     color: grey
@@ -77,23 +70,17 @@ button {
     font-size: 20px;
 
   }
-/* 
-.modal-header {
-  position: fixed;
-} */
-
-  /* #about-us-section {
-    
-  } */
 
   .about-us-p {
     position: absolute;
     justify-content: center;
     text-align: center;
-    top: 50%;
+    font-size: 30px;
+    color: white;
+    height: 50%;
     width: 50%;
-    margin-left: -20%;
-    margin-top: -5%;
+
+
   }
 
   #about-us-div {
@@ -101,7 +88,8 @@ button {
     padding: 400px;
     background-image: url("../images/makeup_background.jpg");
     background-color: #cccccc;
-    height: 900px;
+    height: 100%;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -215,7 +203,9 @@ button {
 	height:80px;
 	width:100%;
 	background-color:#fff;
-	box-shadow:0 2px 3px rgba(0,0,0,0.1);
+  box-shadow:0 2px 3px rgba(0,0,0,0.1);
+  font-size: 25px;
+
 }
 /* 
 .navmenu ul li {

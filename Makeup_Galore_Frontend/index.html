@@ -80,37 +80,37 @@
   </header>
 
   <!-- Blush Products -->
-  <div id='blush-div' class="w3-display-container w3-container">
+  <div id='blush-div' class="flex-container">
       <br><h3 id='blush-products'>Blush Products</h3><br>
 
   </div>
 
   <!-- Bronzer Products -->
-  <div id='bronzer-div' class="w3-display-container w3-container">
+  <div id='bronzer-div' class="flex-container">
       <br><h3 id='bronzer-products'>Bronzer Products</h3><br>
 
   </div>
 
    <!-- Eyes Products -->
-   <div id='eyes-div' class="w3-display-container w3-container">
+   <div id='eyes-div' class="flex-container">
       <br><h3 id='eyes-products'>Eyes Products</h3><br>
 
   </div>
 
    <!-- Foundation Products -->
-   <div id='foundation-div' class="w3-display-container w3-container">
+   <div id='foundation-div' class="flex-container">
       <br><h3 id='foundation-products'>Foundation Products</h3><br>
 
   </div>
 
    <!-- Lips Products -->
-   <div id='lips-div' class="w3-display-container w3-container">
+   <div id='lips-div' class="flex-container">
       <br><h3 id='lips-products'>Lips Products</h3><br>
 
   </div>
 
    <!-- Mascara Products -->
-   <div id='mascara-div' class="w3-display-container w3-container">
+   <div id='mascara-div' class="flex-container">
       <br><h3 id='mascara-products'>Mascara Products</h3><br>
 
   </div>
@@ -130,9 +130,9 @@
         </div>
         <div class="modal-footer">
           <p id="total-price"></p>
-          <button id="pay-btn" type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentModal">Pay</button>
+          <button id="pay-btn" type="button" class="button" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentModal">Pay</button>
           <!-- <button id="refresh-btn" type="button" class="btn btn-primary">Update</button> -->
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+          <button type="button" class="button" data-dismiss="modal">X</button>
         </div>
       </div>
     </div>
@@ -152,9 +152,11 @@
                 <img class="card-icon" src="images/visa.png" alt="visa icon"> <img class="card-icon" src="images/mastercard.png" alt="mastercard icon">
             </div>
             <div id='payment-div' class="modal-body">
-                <p id="total-price"></p>    
+              <div class="payment-inputs">  
+              <p id="total-price-payment"></p>    
 
               <form id='payment-form' action="">
+                
                 <input id="card-number-input" placeholder="Card Number" type="number" min="16" max="16">
                 <input id="cvc-number-input" placeholder="CVC" type="number" min="3" max="3">
                 <br><br>
@@ -185,7 +187,10 @@
                       <option>2019</option>
                   </select>
                 </p>
-                <input id="pay-btn" class="btn btn-primary" type='submit' value='Pay'> 
+              </div>
+              <div class="purchase-button">
+                <input id="purchase-btn" class="button" type='submit' value='Pay'> 
+              </div>
               </form>
             </div>
           </div>

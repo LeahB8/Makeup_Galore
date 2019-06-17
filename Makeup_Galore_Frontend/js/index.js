@@ -22,8 +22,13 @@ const mascaraDiv = document.querySelector('#mascara-div')
 const cartDiv = document.querySelector('#cart-item-div')
 const refreshBtn = document.querySelector('#refresh-btn')
 const totalPriceEl = document.querySelector('#total-price')
+const payBtn = document.querySelector('#pay-btn')
+const purchaseBtn = document.querySelector('#purchase-btn')
+
 
 const sidebar = document.querySelector('#mySidebar')
+
+const totalPricePaymentEl = document.querySelector('#total-price-payment')
 
 
 //------------------ global variables -----------------//
@@ -60,7 +65,6 @@ const renderItem = (item, div) => {
          if (item.price === "0.0" || item.price == null ) return item.price = 10.0
          if (item.description == null) return item.description = 'Click on the image to find out more.'
          if (item.brand == null ) return item.brand = item.name
-         if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
 
         const capitalize = (s) => {
             return s && s[0].toUpperCase() + s.slice(1);
@@ -121,6 +125,7 @@ const deleteItemFromDOM = (item) => {
 const addItemToDOM = (item, currentUserId) => {
     return addItemToServer(item, currentUserId)
         .then(() => {
+            
             currentUser.items.push(item)
             updateCartWithItems()
         })
@@ -128,28 +133,46 @@ const addItemToDOM = (item, currentUserId) => {
 
 //------------------------- User's cart -----------------------------//
 
-const increase_by_one = (field) => {
-    // debugger
+const increase_by_one = (field, cartItem) => {
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
     quantityEl.value = itemQuantity + 1
+
+    addItemToDOM(cartItem, currentUserId)
+
+    updatePrice(cartItem)
 }
     
-const decrease_by_one = (field) => {
+const decrease_by_one = (field, cartItem) => {
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
     if (itemQuantity > 0) {
         if( (itemQuantity - 1) > 0) {
             quantityEl.value = itemQuantity - 1
+           deleteItemFromDOM(cartItem)
         }
     }
+
+    updatePrice(cartItem)
+
 } 
+
+const updatePrice = (cartItem) => {
+    const b = parseInt(document.querySelector(`#x-${cartItem.id}`).innerText)
+    let y = parseInt(document.querySelector(`#qty${cartItem.id}`).value)
+
+    let sum = document.querySelector(`#item-price${cartItem.id}`)
+    sum.innerHTML = `$ ${b * y}` 
+
+    let cartItems = currentUser.items
+    calculateCartItemsSum(cartItems)
+
+}
 
 const updateCartWithItems = () => {
     cartDiv.innerHTML = ``
     let cartItems = currentUser.items
     cartItems.forEach(cartItem => renderCartWithEachItem(cartItem))
-
     calculateCartItemsSum(cartItems)
 }
 
@@ -159,30 +182,108 @@ const renderCartWithEachItem = cartItem => {
 
     if (cartItem.price === "0.0" || cartItem.price === null) return cartItem.price = 10.0
 
-
     itemInCart.innerHTML = `
         <div class="item-name-price">
             <h4 class="item-name">${cartItem.name}</h4>
-            <p class="item-price">$ ${cartItem.price}</p>
+            <p id="item-price${cartItem.id}" class="item-price">$ ${cartItem.price}</p>
         </div>
-        <img class="cart-item-image" src="${cartItem.image_link}" style="height: 70px; width: 70px;">
+            <img class="cart-item-image" src="${cartItem.image_link}" style="height: 70px; width: 70px;">
         <div class="quantity-container">
             <div>
                 Qty: <input class='quantity-input' id="qty${cartItem.id}" type="number" min='1' value="1" name="qty" onKeyPress='isInputNumber(event)' />
                 <button id='increase-button${cartItem.id}'>+</button>
                 <button id='decrease-button${cartItem.id}'>-</button>
+                <p id="x-${cartItem.id}" style="display: none;">${cartItem.price}</p>
             </div>
             <button class='delete-button' id='delete-button${cartItem.id}'>X</button>
         </div>
-    `
+        `
 
-    itemInCart.querySelector(`#delete-button${cartItem.id}`).addEventListener('click', () => deleteItemFromDOM(cartItem))
-    itemInCart.querySelector(`#increase-button${cartItem.id}`).addEventListener('click', () => increase_by_one(`qty${cartItem.id}`))
-    itemInCart.querySelector(`#decrease-button${cartItem.id}`).addEventListener('click', () => decrease_by_one(`qty${cartItem.id}`))
+        // let ItemNamePrice = document.createElement("div")
+        // ItemNamePrice.className = "item-name-price"
+
+        //         let ItemName = document.createElement("h4")
+        //         ItemName.className = "item-name"
+        //         ItemName.innerText = cartItem.name 
+        //         ItemNamePrice.append(ItemName)
+
+        //         let ItemPrice = document.createElement("h4")
+        //         ItemPrice.id = `item-price${cartItem.id}`
+        //         ItemPrice.className = `item-price`
+        //         ItemPrice.innerHTML = `$ ${cartItem.price}`
+        //         ItemNamePrice.append(ItemPrice)
+
+        // itemInCart.append(ItemNamePrice)
+
+        // let image = document.createElement("img")
+        // image.className = "cart-item-image"
+        // image.src = `${cartItem.image_link}`
+        // image.style = "height: 70px; width: 70px;"
+
+        // itemInCart.append(image)
+
+        // let QtyContainer = document.createElement("div")
+        // QtyContainer.className = "quantity-container"
+
+        //          let div1 = document.createElement("div")
+
+
+        //                 let qty = document.createElement("h4")
+                       
+        //                 qty.innerText = `Qty: ${cartItem.price}`
+
+        //                 div1.append(qty)
+
+        //                 let input = document.createElement("input")
+        //                 input.className ="quantity-input"
+        //                 input.id = `qty${cartItem.id}`
+        //                 input.type = "number"
+        //                 input.min = "1"
+        //                 input.value ="1"
+        //                 input.name="qty"
+        //                 input.onkeypress ="isInputNumber(event)"
+                        
+        //                 div1.append(input)
+
+        //                 let button1 = document.createElement("button")
+        //                 button1.id = `increase-button${cartItem.id}`
+        //                 button1.innerHTML = `+`
+
+        //                 div1.append(button1)
+
+        //                 let button2 = document.createElement("button")
+        //                 button2.id = `decrease-button${cartItem.id}`
+        //                 button2.innerHTML = `-`
+
+        //                 div1.append(button2)
+                    
+        //         QtyContainer.append(div1)
+        
+        // let deleteBtn = document.createElement("button")
+        // deleteBtn.className = "delete-button"
+        // deleteBtn.id = `delete-button${cartItem.id}`
+        // deleteBtn.innerHTML = `X`
+
+        // itemInCart.append(deleteBtn)
+
+
+        // itemInCart.append(QtyContainer)
+
+        // let QtyNum = parseInt(document.querySelector(`#qty${cartItem.id}`))
+        // let x = QtyNum.value
+
+    // let singleItemQuantity  = parseInt(document.querySelector(`#qty${cartItem.id}`).value)
+    // console.log(singleItemQuantity)
+
+    itemInCart.querySelector(`#delete-button${cartItem.id}`).addEventListener('click', () => deleteItemFromDOM(cartItem))    
+    itemInCart.querySelector(`#increase-button${cartItem.id}`).addEventListener('click', () => increase_by_one(`qty${cartItem.id}`, cartItem))
+    itemInCart.querySelector(`#decrease-button${cartItem.id}`).addEventListener('click', () => decrease_by_one(`qty${cartItem.id}`, cartItem))
 
     cartDiv.append(itemInCart)
-  
+
 }
+
+
 
 const calculateCartItemsSum = cartItems => {
     let itemsArr = cartItems.map(cartItem => cartItem.price)
@@ -192,6 +293,7 @@ const calculateCartItemsSum = cartItems => {
     } else {
         let cartItemsTotal = itemsArr.reduce((a,b) => parseFloat(a) + parseFloat(b))
         totalPriceEl.innerText = `Total: $${cartItemsTotal} CAD`
+        totalPricePaymentEl.innerText = `Total: $${cartItemsTotal} CAD`
     }
 }
 
@@ -202,30 +304,6 @@ const isInputNumber = (event) => {
        event.preventDefault()
    }
 }
-
-// refreshBtn.addEventListener('click', () => {
-    
-//     updateCartWithItems()
-// })
-
-
-
-//------------------ forward/back button event listeners ----------------//
-
-// forwardBtn.addEventListener('click', () => {
-//     pageNumber++
-//     backBtn.removeAttribute('disabled', true)
-//     fetchAllMakeup().then(renderitems)
-// })
-
-// backBtn.addEventListener('click', () => {
-//     if (pageNumber > 0) {
-//         pageNumber-- 
-//     } else {
-//         backBtn.setAttribute('disabled', true)
-//     }
-//     fetchAllMakeup().then(renderitems)
-// })
 
 
 //------------------ calling initialise function -----------------//
