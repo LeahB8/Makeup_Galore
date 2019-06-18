@@ -70,9 +70,20 @@ const addItemToServer = (item, currentUserId) => {
             brand: item.brand,
             price: item.price,
             description: item.description,
-            user_id: currentUserId
+            user_id: currentUserId,
+            quantity: 1
         })
     }).then(resp => resp.json())
+}
+
+const editItemQuantityInServer = (cartItem) => {
+    return fetch(ITEM_URL + `/${cartItem.id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        quantity: cartItem.quantity
+    })
+}).then(resp => resp.json())
 }
 
 const deleteItemFromServer = item => {
