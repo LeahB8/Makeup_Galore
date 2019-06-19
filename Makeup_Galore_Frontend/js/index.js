@@ -21,6 +21,14 @@ const purchaseBtn = document.querySelector('#purchase-btn')
 
 const totalPricePaymentEl = document.querySelector('#total-price-payment')
 
+const paymentForm = document.querySelector('#payment-form')
+const cardNumberInput = document.querySelector('#card-number-input')
+const cvcNumberInput = document.querySelector('#cvc-number-input')
+const expiryMonthInput = document.querySelector('#expiry-month-input')
+const expiryYearInput = document.querySelector('#expiry-year-input')
+const cardholdersNameInput = document.querySelector('#cardholders-name-input')
+const cardholdersPostcodeInput = document.querySelector('#postcode-input')
+
 //------------------ global variables -----------------//
 
 let currentUserId = 6
@@ -108,13 +116,13 @@ const deleteItemFromDOM = (item) => {
     item = currentUser.items.find(currentItem => currentItem.id === item.id)
     currentUser.items = currentUser.items.filter(currentItem => currentItem.id !== item.id)
     return deleteItemFromServer(item)
-        .then(updateCartWithItems)
+        .then(updateCartWithItems())
 }
 
 const addItemToDOM = (item, currentUserId) => {
     return addItemToServer(item, currentUserId)
-        .then(() => {
-            currentUser.items.push(item)
+        .then(resp => {
+            currentUser.items.push(resp)
             updateCartWithItems()
         })
 }
@@ -165,13 +173,17 @@ const isInputNumber = (event) => {
 
 const calculateCartItemsSum = () => {
     let itemsArr = Array.from(document.querySelectorAll('p.item-price')).map(p => parseFloat(p.innerText.replace('$', '')))
-    if (itemsArr == 0) {
+    if (itemsArr == [] || itemsArr == null || itemsArr == 0 || itemsArr == "") {
         cartDiv.innerText = 'Your cart is empty.'
-        totalPriceEl.innerText = `Total: $0 CAD`
+        totalPriceEl.innerText = ""
+        document.querySelector('#pay-btn').style.display = 'none'
+        document.querySelector('#lower-close-btn').style.display = 'none'
     } else {
         let cartItemsTotal = parseFloat(itemsArr.reduce((a,b) => parseFloat(a) + parseFloat(b))).toFixed(2)
-        totalPriceEl.innerText = `Total: $${cartItemsTotal} CAD`
+        totalPriceEl.innerText = `Total: $${cartItemsTotal}`
         totalPricePaymentEl.innerText = `Total: $${cartItemsTotal} CAD`
+        document.querySelector('#pay-btn').style.display = 'block'
+        document.querySelector('#lower-close-btn').style.display = 'block'
     }
 }
 
@@ -226,6 +238,27 @@ const renderCartWithEachItem = cartItem => {
 
     cartDiv.append(itemInCart)
 }
+
+//------------------ payment form -----------------//
+
+paymentForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    // let usersPaymentInfo = {
+    //     card_number: cardNumberInput.value,
+    //     cvc_number: cvcNumberInput.value,
+    //     expiry_month: expiryMonthInput.value,
+    //     expiry_year: expiryYearInput.value,
+    //     cardholders_name: cardholdersNameInput.value,
+    //     cardholders_postcode: cardholdersPostcodeInput.value
+    // }
+
+    paymentForm.reset()
+})
+
+// const storeUsersPaymentInfoInServer = (usersPaymentInfo, user) => {
+
+// }
+
 
 //------------------ calling initialise function -----------------//
 
