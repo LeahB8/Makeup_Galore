@@ -130,9 +130,12 @@
         </div>
         <div class="modal-footer">
           <p id="total-price"></p>
-          <button id="pay-btn" type="button" class="button" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentModal">Pay</button>
+          <button id="pay-btn" type="button" class="button" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentModal">Checkout</button>
           <!-- <button id="refresh-btn" type="button" class="btn btn-primary">Update</button> -->
-          <button type="button" class="button" data-dismiss="modal">X</button>
+          <!-- <button type="button" class="button" data-dismiss="modal">X</button> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       </div>
     </div>
@@ -153,54 +156,78 @@
             </div>
             <div id='payment-div' class="modal-body">
               <div class="payment-inputs">  
-              <p id="total-price-payment"></p>    
+                <p id="total-price-payment"></p>    
 
               <form id='payment-form' action="">
                 
-                <input id="card-number-input" placeholder="Card Number" type="number" min="16" max="16">
-                <input id="cvc-number-input" placeholder="CVC" type="number" min="3" max="3">
-                <br><br>
-                <p>Expiry: 
-                  <select id="expiry-month-input">
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                    <option>04</option>
-                    <option>05</option>
-                    <option>06</option>
-                    <option>07</option>
-                    <option>08</option>
-                    <option>09</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                  </select>
-                  <select id="expiry-year-input">
-                      <option>2027</option>
-                      <option>2026</option>
-                      <option>2025</option>
-                      <option>2024</option>
-                      <option>2023</option>
-                      <option>2022</option>
-                      <option>2021</option>
-                      <option>2020</option>
-                      <option>2019</option>
-                  </select>
-                </p>
-              </div>
-              <div class="purchase-button">
-                <input id="purchase-btn" class="button" type='submit' value='Pay'> 
-              </div>
+                  <input id="card-number-input" placeholder="Card Number" type="number" min="16" max="16">
+                  <input id="cvc-number-input" placeholder="CVC" type="number" min="3" max="3">
+                  <br><br>
+                  <p>Expiry: 
+                    <select id="expiry-month-input">
+                      <option>01</option>
+                      <option>02</option>
+                      <option>03</option>
+                      <option>04</option>
+                      <option>05</option>
+                      <option>06</option>
+                      <option>07</option>
+                      <option>08</option>
+                      <option>09</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                    <select id="expiry-year-input">
+                        <option>2027</option>
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                        <option>2020</option>
+                        <option>2019</option>
+                    </select>
+                  </p>
+                  <input type="text" placeholder="Cardholder's Name">
+                  <input id="postcode-input" type="text" placeholder="Postcode">
+                </div>
+                <br>
+                  <div class="modal-footer">
+                    <button id="back-btn" type="button" class="button" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#cartItemsModal">Back</button>
+                    <input id="purchase-btn" class="button" type='submit' data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#paymentSuccessModal" value='Pay'> 
+                  </div>
               </form>
             </div>
           </div>
         </div>
       </div>
 
+        <!-- Successfully paid modal -->
+  <div class="modal fade" id="paymentSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLongTitle">Payment Successful</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id='cart-item-div' class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <p id="total-price"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 <!-- Footer -->
-<footer id="footer" class="page-footer font-small blue pt-4">
+<footer id="footer">
 
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-left">

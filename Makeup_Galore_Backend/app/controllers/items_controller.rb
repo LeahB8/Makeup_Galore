@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
     def update
         item = Item.find_by(id: params[:id])
         if item
-            item.update(user_id: item_params[:user_id])
+            item.update(item_params)
             render json: item
         end
     end

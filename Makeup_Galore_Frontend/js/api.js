@@ -80,10 +80,8 @@ const editItemQuantityInServer = (cartItem) => {
     return fetch(ITEM_URL + `/${cartItem.id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        quantity: cartItem.quantity
-    })
-}).then(resp => resp.json())
+    body: JSON.stringify(cartItem)
+    }).then(resp => resp.json())
 }
 
 const deleteItemFromServer = item => {

@@ -5,11 +5,6 @@ button, .button {
     border-radius: 6px !important;
   }
 
-  .quantity-input {
-    width: 30%;
-    max-width: 30px;
-  }
-
   .delete-button {
     /* float: right; */
   }
@@ -79,8 +74,6 @@ button, .button {
     color: white;
     height: 50%;
     width: 50%;
-
-
   }
 
   #about-us-div {
@@ -139,8 +132,8 @@ button, .button {
   } */
 
   footer {
-    z-index:9999;
-    height:80px;
+    /* z-index:9999; */
+    height:150px;
     width:100%;
     /* background-color: palevioletred; */
     box-shadow:0 2px 3px rgba(141, 112, 112, 0.1);
@@ -193,6 +186,20 @@ button, .button {
     width: 60px;
   }
 
+  .quantity-input {
+    width: 30%;
+    max-width: 30px;
+  }
+
+  #postcode-input {
+    width: 90px;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+  }
+
   
 /* __________ Menu __________ */
 .menu_block {
@@ -209,10 +216,10 @@ button, .button {
 
 }
 
-#my-footer {
+/* #my-footer {
   padding: 30px;
   border: 30px;
   height: 80px;
   background-color: white;
   width: 100%;
-}
+} */

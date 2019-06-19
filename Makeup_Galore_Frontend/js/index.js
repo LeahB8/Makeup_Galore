@@ -1,10 +1,4 @@
 //------------------ finding HTML elements -----------------//
-
-const makeupDiv = document.querySelector('#makeup-div')
-
-const forwardBtn = document.querySelector('#forward')
-const backBtn = document.querySelector('#back')
-
 const blushBtn = document.querySelector('#blush-button')
 const bronzerBtn = document.querySelector('#bronzer-button')
 const eyesBtn = document.querySelector('#eyes-button')
@@ -12,6 +6,7 @@ const foundationBtn = document.querySelector('#foundation-button')
 const lipsBtn = document.querySelector('#lips-button')
 const mascaraBtn = document.querySelector('#mascara-button')
 
+const makeupDiv = document.querySelector('#makeup-div')
 const blushDiv = document.querySelector('#blush-div')
 const bronzerDiv = document.querySelector('#bronzer-div')
 const eyesDiv = document.querySelector('#eyes-div')
@@ -20,20 +15,14 @@ const lipsDiv = document.querySelector('#lips-div')
 const mascaraDiv = document.querySelector('#mascara-div')
 
 const cartDiv = document.querySelector('#cart-item-div')
-const refreshBtn = document.querySelector('#refresh-btn')
 const totalPriceEl = document.querySelector('#total-price')
 const payBtn = document.querySelector('#pay-btn')
 const purchaseBtn = document.querySelector('#purchase-btn')
 
-
-const sidebar = document.querySelector('#mySidebar')
-
 const totalPricePaymentEl = document.querySelector('#total-price-payment')
-
 
 //------------------ global variables -----------------//
 
-let pageNumber = 0
 let currentUserId = 6
 let currentUser = {}
 
@@ -42,7 +31,6 @@ let currentUser = {}
 const init = () => {
     fetchUser(currentUserId).then(user => {
         currentUser = user
-        // debugger
         updateCartWithItems()
     }).then(fetchCalls)
 }
@@ -56,7 +44,7 @@ const fetchCalls = () => {
     fetchMascaraProducts().then(renderMascaraProducts)
 }
 
-//------------------ render products -----------------//
+//-------------------- render products --------------------//
 
 
 const renderItem = (item, div) => {
@@ -80,7 +68,7 @@ const renderItem = (item, div) => {
             </a>
             <p>${capitalize(item.brand)}</p>
             <p> $${item.price} CAD </p>
-            <p>${item.description}</p>
+            <p>${capitalize(item.description)}</p>
             <button id='add-button${item.id}'>Add to cart</button>
         `
         div.append(makeupCard)
@@ -116,7 +104,6 @@ const renderMascaraProducts = items => {
 
 //------------------- client side add + delete item to cart ----------------------//
 
-
 const deleteItemFromDOM = (item) => {
     item = currentUser.items.find(currentItem => currentItem.id === item.id)
     currentUser.items = currentUser.items.filter(currentItem => currentItem.id !== item.id)
@@ -134,13 +121,14 @@ const addItemToDOM = (item, currentUserId) => {
 
 //---------------------------------------------- User's cart ------------------------------------------------//
 
-
 //-------------------- cart items quantity --------------------//
 
 const increase_by_one = (field, cartItem) => {
+    // debugger
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
     quantityEl.value = itemQuantity + 1
+    
     let newCartItemQuantity = cartItem.quantity + 1
     cartItem.quantity = newCartItemQuantity
     editItemQuantityInServer(cartItem)
@@ -155,10 +143,14 @@ const decrease_by_one = (field, cartItem) => {
             quantityEl.value = itemQuantity - 1
         }
     }
-    let newCartItemQuantity = cartItem.quantity - 1
-    cartItem.quantity = newCartItemQuantity
-    editItemQuantityInServer(cartItem)
-        .then(updatePriceForEachItem(cartItem))
+    if (cartItem.quantity > 0) {
+        if( (itemQuantity - 1) > 0) {
+            let newCartItemQuantity = cartItem.quantity - 1
+            cartItem.quantity = newCartItemQuantity
+            editItemQuantityInServer(cartItem)
+                .then(data => updatePriceForEachItem(data))
+            }
+    }
 } 
 
 const isInputNumber = (event) => {
@@ -185,10 +177,10 @@ const calculateCartItemsSum = () => {
 
 const updatePriceForEachItem = (cartItem) => {
     const b = parseFloat(document.querySelector(`#x-${cartItem.id}`).innerText).toFixed(2)
-    let y = parseFloat(document.querySelector(`#qty${cartItem.id}`).value).toFixed(2)
+    let y = parseFloat(cartItem.quantity).toFixed(2)
 
     let sum = document.querySelector(`#item-price${cartItem.id}`)
-    sum.innerHTML = `$${b * y}`
+    sum.innerHTML = `$${(b * y).toFixed(2)}`
     // let cartItems = currentUser.items
     // calculateCartItemsSum(cartItems)
     calculateCartItemsSum()
@@ -211,16 +203,15 @@ const renderCartWithEachItem = cartItem => {
     if (cartItem.price === "0.0" || cartItem.price === null) return cartItem.price = 10.0
     // if (cartItem.price === "0.0") return cartItem.price = 
 
-
     itemInCart.innerHTML = `
         <div class="item-name-price">
             <h4 class="item-name">${cartItem.name}</h4>
-            <p id="item-price${cartItem.id}" class="item-price">$${cartItem.price}</p>
+            <p id="item-price${cartItem.id}" class="item-price">$${cartItem.price * cartItem.quantity}</p>
         </div>
             <img class="cart-item-image" src="${cartItem.image_link}" style="height: 70px; width: 70px;">
         <div class="quantity-container">
             <div>
-                Qty: <input class='quantity-input' id="qty${cartItem.id}" type="number" min='1' value="${cartItem.quantity}" name="qty" onKeyPress='isInputNumber(event)' />
+                Qty: <input class='quantity-input' id="qty${cartItem.id}" type="number" value="${cartItem.quantity}" name="qty" onKeyPress='isInputNumber(event)' />
                 <button id='increase-button${cartItem.id}'>+</button>
                 <button id='decrease-button${cartItem.id}'>-</button>
                 <p id="x-${cartItem.id}" style="display: none;">${cartItem.price}</p>
@@ -234,7 +225,6 @@ const renderCartWithEachItem = cartItem => {
     itemInCart.querySelector(`#decrease-button${cartItem.id}`).addEventListener('click', () => decrease_by_one(`qty${cartItem.id}`, cartItem))
 
     cartDiv.append(itemInCart)
-
 }
 
 //------------------ calling initialise function -----------------//
