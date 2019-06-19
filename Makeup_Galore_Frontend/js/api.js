@@ -43,6 +43,8 @@ const RAILS_URL = 'http://localhost:3000'
 const USER_URL = `${RAILS_URL}/users`
 const ITEM_URL = `${RAILS_URL}/items`
 
+//---------------- users ---------------//
+
 const fetchUsers = () => {
     return fetch(USER_URL)
     .then(resp => resp.json())
@@ -52,6 +54,17 @@ const fetchUser = currentUserId => {
     return fetch(USER_URL + `/${currentUserId}`)
     .then(resp => resp.json())
 }
+
+const createUserInServer = usersPaymentInfo => {
+    return fetch(USER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(usersPaymentInfo)
+    }).then(resp => resp.json())
+}
+
+//---------------- items ---------------//
+
 
 const fetchItems = () => {
     return fetch(ITEM_URL)

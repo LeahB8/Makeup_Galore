@@ -16,8 +16,14 @@ class UsersController < ApplicationController
     # end
 
     def create
-        user = User.create(username: params[:username])
+        user = User.create(user_params)
             render json: user, include: [:items]
+    end
+
+
+    private
+    def user_params
+        params.require(:user).permit(:username, :card_number, :cvc_number, :expiry_month, :expiry_year, :cardholders_name, :cardholders_postcode)
     end
 
 end

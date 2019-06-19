@@ -132,7 +132,6 @@ const addItemToDOM = (item, currentUserId) => {
 //-------------------- cart items quantity --------------------//
 
 const increase_by_one = (field, cartItem) => {
-    // debugger
     let quantityEl = document.getElementById(field)
     itemQuantity = parseInt(quantityEl.value)
     quantityEl.value = itemQuantity + 1
@@ -241,24 +240,22 @@ const renderCartWithEachItem = cartItem => {
 
 //------------------ payment form -----------------//
 
-paymentForm.addEventListener('submit', (event) => {
+purchaseBtn.addEventListener('click', (event) => {
     event.preventDefault()
-    // let usersPaymentInfo = {
-    //     card_number: cardNumberInput.value,
-    //     cvc_number: cvcNumberInput.value,
-    //     expiry_month: expiryMonthInput.value,
-    //     expiry_year: expiryYearInput.value,
-    //     cardholders_name: cardholdersNameInput.value,
-    //     cardholders_postcode: cardholdersPostcodeInput.value
-    // }
+    let usersPaymentInfo = {
+        username: currentUser.username,
+        card_number: cardNumberInput.value,
+        cvc_number: cvcNumberInput.value,
+        expiry_month: expiryMonthInput.value,
+        expiry_year: expiryYearInput.value,
+        cardholders_name: cardholdersNameInput.value,
+        cardholders_postcode: cardholdersPostcodeInput.value
+    }
+    debugger
 
-    paymentForm.reset()
+    createUserInServer(usersPaymentInfo)
+        .then(paymentForm.reset())
 })
-
-// const storeUsersPaymentInfoInServer = (usersPaymentInfo, user) => {
-
-// }
-
 
 //------------------ calling initialise function -----------------//
 
