@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+
     <link href="css/index.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
@@ -54,7 +56,18 @@
           <li class="nav-item">
             <a id='cart-button' data-toggle="modal" data-target="#cartItemsModal" class="nav-link">Cart</a>
           </li>
+          <!-- <li class="nav-item wrap search">
+            <input type="text" class="searchTerm" placeholder="search"><button type="submit" class="searchButton"><i class="fa fa-search"></i> </button>
+          </li> -->
       </ul>
+      <div id="search-bar" class="wrap nav-item">
+        <div class="search">
+           <input id="search-bar-input" type="text" class="searchTerm" placeholder="Search Products">
+           <button type="submit" class="searchButton">
+             <i class="fa fa-search"></i>
+          </button>
+        </div>
+     </div>
     </div>
   </nav>
 </div>

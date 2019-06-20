@@ -4,10 +4,10 @@ button, .button {
     background-color: rgb(199, 53, 138);
     border-radius: 6px !important;
   }
-
+/* 
   .delete-button {
-    /* float: right; */
-  }
+    float: right;
+  } */
 
   /* #payment-div {
     display: flex;
@@ -227,11 +227,56 @@ button, .button {
 
 }
 
-/* #my-footer {
-  padding: 30px;
-  border: 30px;
-  height: 80px;
-  background-color: white;
-  width: 100%;
+/* .searchButton {
+  width: 40px;
+  height: 36px;
+  color: #fff;
+  background-color: rgb(199, 53, 138);
+  text-align: center;
+  border-radius: 0 5px 5px 0 !important;
+  cursor: pointer;
+  font-size: 20px;
 } */
 
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid rgb(199, 53, 138);
+  background:  rgb(199, 53, 138);
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0 !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+.searchTerm {
+  width: 100%;
+  border: 1px solid grey;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: rgba(0,0,0,.5);
+}
+
+.searchTerm:focus{
+  color: rgba(0,0,0,.5);
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.wrap{
+  float: right !important;
+  width: 20%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

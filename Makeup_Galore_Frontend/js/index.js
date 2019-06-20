@@ -62,7 +62,9 @@ const renderItem = (item, div) => {
          if (item.price === "0.0" || item.price === null ) return item.price = 10.0
          if (item.description === null || item.description === "" ) return item.description = 'Click on the image to find out more.'
          if (item.brand === null || item.brand === "") return item.brand = item.name
-         if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') return item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
+         if (item.image_link === 'https://static-assets.glossier.com/production/spree/images/attachments/000/001/241/portrait_normal/CP_PDP_02.jpg?1488382023') {
+             item.image_link = 'https://i.ebayimg.com/images/g/UAMAAOSwbrZcdN31/s-l1600.jpg'
+            }
 
         const capitalize = (s) => {
             return s && s[0].toUpperCase() + s.slice(1);
@@ -255,6 +257,22 @@ purchaseBtn.addEventListener('click', (event) => {
 
     createUserInServer(usersPaymentInfo)
         .then(paymentForm.reset())
+})
+
+//------------------ search bar -----------------//
+
+const searchBar = document.querySelector('#search-bar-input')
+    searchBar.addEventListener('keyup', (e) => {
+        let term = e.target.value.toLowerCase()
+        let makeupItems = document.getElementsByClassName('polaroid')
+        Array.from(makeupItems).forEach((makeupItem) => {
+            let name = makeupItem.firstElementChild.textContent
+            if (name.toLowerCase().indexOf(term)!= -1) {
+                makeupItem.style.display = 'inline-block'
+            } else {
+                makeupItem.style.display = 'none'
+            }
+        })
 })
 
 //------------------ calling initialise function -----------------//
